@@ -1,4 +1,3 @@
-# Task-trekker with Enter (Добавить функцию по кнопке Enter)
 import tkinter as tk
 from tkinter import messagebox
 import pickle
@@ -38,6 +37,7 @@ def add_task_enter(event=None):
     if task:
         task_listBox.insert(tk.END, task)  # Исправлено с task_listbox на task_listBox
         task_entry.delete(0, tk.END)  # Очистить поле ввода
+        save_tasks()  # Сохраняем задачи после добавления
     else:
         messagebox.showwarning("Предупреждение", "Введите задачу!")
 
@@ -71,6 +71,9 @@ def clear_tasks():
 # Создаем текстовое поле для ввода задачи
 task_entry = tk.Entry(root, width=52)
 task_entry.grid(row=0, column=0, columnspan=2, pady=10)
+
+# Привязываем нажатие клавиши Enter к функции добавления задачи
+task_entry.bind("<Return>", add_task_enter)
 
 # Создаем и позиционируем кнопку для добавления задачи
 add_button = tk.Button(root, text="Добавить задачу", command=add_task)
